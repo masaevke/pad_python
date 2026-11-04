@@ -15,8 +15,22 @@ dependencies = [
     "python-dotenv>=1.0.1",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.11",
+    "types-requests",
+    "types-psycopg2",
+    "types-PyYAML",
+]
+
 [project.scripts]
 pg2core = "pg2core_generator:main"
 
 [tool.setuptools]
-py-modules = ["pg2core_generator"]
+py-modules = ["pg2core_generator", "pg2core_types"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["pg2core_generator.py", "pg2core_types.py"]
+strict = true
+show_error_codes = true
