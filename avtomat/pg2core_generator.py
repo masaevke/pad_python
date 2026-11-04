@@ -142,6 +142,10 @@ CORE_FIELDS = {k: v for k, v in PREP_FIELDS.items()
                if k not in ("_entity", "_op_type", "_event_source", "_dbt_invocation_id")}
 
 
+class MetadataValidationError(ValueError):
+    """В метаданных отсутствует описание запрошенной таблицы."""
+
+
 def model_identifier(value):
     # Логическое имя dbt-модели: физическое имя отдельно задается через alias.
     if not isinstance(value, str) or not IDENTIFIER.fullmatch(value):
@@ -779,7 +783,7 @@ class PostgresToCoreConverter:
         self.ddl = []
         for name in self.cfg["pg_tables_to_convert"]:
             if name not in metadata:
-                raise ValueError("Метаданные таблицы не найдены: " + name)
+                raise MetadataValidationError("Метаданные таблицы не найдены: " + name)
             t = self.table_metadata(name, metadata[name])
             self.tables.append(t)
             self.ddl.append(self.raw_ddl(t))
@@ -907,6 +911,9 @@ def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
     try:
         run(cfg)
+    except MetadataValidationError as exc:
+        LOG.error("Ошибка метаданных: %s", exc)
+        return 1
     except (requests.RequestException, psycopg2.Error) as exc:
         message = str(exc)
         secrets = [os.environ.get(cfg[key], "") for key in (
