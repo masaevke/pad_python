@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pg2core-generator"
+version = "0.1.0"
+description = "Подготовка PostgreSQL-источников и dbt-моделей для ADB (Greenplum)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "psycopg2-binary>=2.9.9",
+    "PyYAML>=6.0.1",
+    "python-dotenv>=1.0.1",
+]
+
+[project.scripts]
+pg2core = "pg2core_generator:main"
+
+[tool.setuptools]
+py-modules = ["pg2core_generator"]

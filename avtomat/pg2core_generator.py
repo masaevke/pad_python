@@ -1,7 +1,7 @@
 """Генератор PostgreSQL -> UP/JSONB -> dbt prep/core
 Порядок работы:
 1. Общий oplog-ный поток уже должен существовать и надо будет задать его топик - создай его
-2. Установить зависимости: python -m pip install requests psycopg2-binary PyYAML python-dotenv.
+2. Установить проект из папки avtomat: python -m pip install -e .
    Заполнить параметры в config, а логины/пароли/API-креды - в .env рядом с этим .py.
    Шаблон для скачивания из Git: .env.example; переименовать его в .env.
 3. Выполнить python pg2core_generator.py --dry-run и проверить output_dir.
