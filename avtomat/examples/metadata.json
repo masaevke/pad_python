@@ -1,0 +1,92 @@
+{
+  "customers": {
+    "columns": [
+      {
+        "name": "customer_id",
+        "data_type": "uuid",
+        "description": "Идентификатор покупателя"
+      },
+      {
+        "name": "customer_name",
+        "data_type": "varchar(200)",
+        "description": "Имя покупателя"
+      },
+      {
+        "name": "email",
+        "data_type": "varchar(254)",
+        "description": "Адрес электронной почты"
+      },
+      {
+        "name": "registered_at",
+        "data_type": "timestamptz",
+        "description": "Дата и время регистрации"
+      }
+    ],
+    "primary_key": ["customer_id"]
+  },
+  "orders": {
+    "columns": [
+      {
+        "name": "order_id",
+        "data_type": "bigint",
+        "description": "Идентификатор заказа"
+      },
+      {
+        "name": "customer_id",
+        "data_type": "uuid",
+        "description": "Идентификатор покупателя"
+      },
+      {
+        "name": "ordered_at",
+        "data_type": "timestamptz",
+        "description": "Дата и время оформления заказа"
+      },
+      {
+        "name": "status",
+        "data_type": "varchar(30)",
+        "description": "Статус заказа"
+      },
+      {
+        "name": "total_amount",
+        "data_type": "numeric(18,2)",
+        "description": "Общая сумма заказа"
+      },
+      {
+        "name": "is_paid",
+        "data_type": "boolean",
+        "description": "Признак оплаты заказа"
+      }
+    ],
+    "primary_key": ["order_id"]
+  },
+  "order_items": {
+    "columns": [
+      {
+        "name": "order_id",
+        "data_type": "bigint",
+        "description": "Идентификатор заказа"
+      },
+      {
+        "name": "line_number",
+        "data_type": "integer",
+        "description": "Номер позиции внутри заказа"
+      },
+      {
+        "name": "product_name",
+        "data_type": "text",
+        "description": "Название товара"
+      },
+      {
+        "name": "quantity",
+        "data_type": "integer",
+        "description": "Количество товара"
+      },
+      {
+        "name": "unit_price",
+        "data_type": "numeric(18,2)",
+        "description": "Цена единицы товара"
+      }
+    ],
+    "primary_key": ["order_id", "line_number"]
+  }
+}
