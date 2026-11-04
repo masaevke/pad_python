@@ -2,6 +2,7 @@
 __pycache__/
 pg2core_output/
 .venv/
+.mypy_cache/
 *.egg-info/
 build/
 dist/
