@@ -1,0 +1,20 @@
+{
+  "generate_flows": false,
+  "apply_ddl_to_adb": false,
+  "create_flows_via_api": false,
+  "output_dir": "./pg2core_output/demo",
+  "pg_database": "sales",
+  "pg_schema_name": "public",
+  "pg_tables_to_convert": ["customers", "orders", "order_items"],
+  "source_id": "sales",
+  "adb_database": "adb_demo",
+  "adb_raw_schema": "raw_sales",
+  "adb_prep_schema": "prep_sales",
+  "adb_core_schema": "core_sales",
+  "dbt_project_name": "adwh_to_adb",
+  "model_prefix": "sales",
+  "model_directory": "sales",
+  "core_alias_suffix": "_new",
+  "partition_start": "2026-11-01",
+  "partition_months": 3
+}
